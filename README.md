@@ -1,0 +1,2 @@
+# Get solid understanding of flask
+Not really building anything interesting here. Just applying Flask concepts that I picked from online sources but freestyling with them to get a solid understanding. This is a server-side generated project. Might do a Flask REST API type project after this.
