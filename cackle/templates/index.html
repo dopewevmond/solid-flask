@@ -3,15 +3,45 @@
     {{ super() }}
     <link rel="stylesheet" href="{{url_for('static', filename='css/styles.css')}}">
 {% endblock %}
+{% block metas %}
+    {{ super() }}
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="UTF-8">
+{% endblock %}
+{% block title %}
+    Cackle - Share what&apos;s happening around you
+{% endblock %}
+
+
 
 {% block navbar %}
-    {# navbar comes here #}
+    <nav class="navbar navbar-default">
+        <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">
+                <img class="img-responsive" src="{{url_for('static', filename='images/logo.svg')}}" alt="logo">
+            </a>
+        </div>
+    
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-right">
+            <li><a href="#">Link</a></li>
+            </ul>
+        </div><!-- /.navbar-collapse -->
+        </div><!-- /.container-fluid -->
+    </nav>
 {% endblock %}
 
-{% block content %}
-    {# page content comes here #}   
-{% endblock %}
-
-{% block footer %}
-    {# footer comes here #}
+{% block content %}   
+    <footer class="text-center">
+        &copy; 2022 Cackle Inc.
+    </footer>
 {% endblock %}

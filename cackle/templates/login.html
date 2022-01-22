@@ -1,0 +1,12 @@
+{% extends 'index.html' %}
+
+{% block content %}
+    {# since we do not want this to override the jinja 'content block in the index.html file we call the super method' #}
+
+    <div class="container">
+        {% include 'flash.html' %}
+        <h2>Log In</h2>
+    </div>
+        
+    {{super()}}
+{% endblock %}
