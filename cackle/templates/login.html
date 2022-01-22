@@ -5,7 +5,44 @@
 
     <div class="container">
         {% include 'flash.html' %}
-        <h2>Log In</h2>
+
+        <div class="row">
+            <div class="col-xs-12 col-sm-3"></div>
+            <div class="col-xs-12 col-sm-6">
+                <h2>Log In</h2>
+
+        <form action="" method="post" novalidate>
+            {{ form.hidden_tag() }}
+                    <div class="col-xs-12">
+                        <div class="input-group">
+                            <label>
+                                {{ form.username.label }}
+                                {{ form.username(size=32, class='form-control cs-form') }}
+                            </label>
+                        </div>
+
+                        <div class="input-group">
+                            <label>
+                                {{ form.password.label }}
+                                {{ form.password(size=28, class='form-control cs-form') }}
+                            </label>
+                        </div>
+
+                        <div class="input-group">
+                            <label>
+                                {{form.remember_me()}}
+
+                                {{ form.remember_me.label }}
+                            </label>
+                        </div>
+
+                        <div class="input-group">
+                            {{form.submit(class='btn btn-primary')}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
     </div>
         
     {{super()}}

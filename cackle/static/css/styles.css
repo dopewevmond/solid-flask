@@ -6,3 +6,10 @@
     height: 50px;
     padding-left: 5px;
 }
+.input-group {
+    width: 100%;
+}
+.form-control {
+    border-radius: 5px !important;
+    width: 100% !important;
+}
