@@ -16,6 +16,6 @@ def login():
     return render_template('login.html', form=form)
 
 # verifying my secret key
-@app.route('/verify')
-def verify():
-    return '<p>{}</p>'.format(app.config['SECRET_KEY'])
+# @app.route('/verify')
+# def verify():
+#     return '<p>{}</p>'.format(app.config['SECRET_KEY'])
