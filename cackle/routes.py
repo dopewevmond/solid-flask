@@ -3,6 +3,13 @@ from flask import render_template, flash, redirect, url_for
 from cackle.forms import LoginForm, SignupForm
 from flask_login import current_user, login_user, logout_user, login_required
 from cackle.models import User, Post
+from datetime import datetime
+
+@app.before_request
+def before_request():
+    if current_user.is_authenticated:
+        current_user.last_seen = datetime.utcnow()
+        db.session.commit()
 
 @app.route('/')
 @app.route('/home')
@@ -25,6 +32,14 @@ def login():
         flash('Logged in successfully', 'success')
         return redirect(url_for('index'))
     return render_template('login.html', form=form)
+
+
+@app.route('/user/<username>')
+@login_required
+def user(username):
+    user = User.query.filter_by(username=username).first_or_404()
+    posts = user.posts
+    return render_template('user.html', user=user, posts=posts)
 
 @app.route('/signup', methods=['GET', 'POST'])
 def signup():

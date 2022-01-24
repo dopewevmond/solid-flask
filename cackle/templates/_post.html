@@ -1,0 +1,12 @@
+<div class="row">
+    <div class="col-12 col-md-2">
+        <img src="{{post.author.avatar(36)}}" alt="{{post.author.username}}&apos;s avatar">
+    </div>
+    <div class="col col-md">
+        <span><strong>{{ post.author.username }}</strong></span>
+        =>
+        <span>
+            {{ post.body }}
+        </span>
+    </div>
+</div>

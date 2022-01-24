@@ -1,0 +1,13 @@
+{% extends 'index.html' %}
+
+{% block content %}
+    <div class="container">
+        <h2>User: {{ user.username }}</h2>
+        <img src="{{ user.avatar(128) }}" alt="">
+        {{ user.joined }}
+        <hr>
+            {% for post in posts %}
+                {% include '_post.html'   %}
+            {% endfor %}
+    </div>
+{% endblock %}
