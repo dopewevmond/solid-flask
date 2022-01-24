@@ -7,7 +7,7 @@ To work on this project locally:
 * Clone this repository
 * Make sure you are in a virtual environment
 * Install all dependencies (which will be in the requirements.txt file) by running `pip install -r /path/to/requirements.txt`
-* Create a `.env` file in the root of your project and all the following variables
+* Create a `.env` file in the root of your project and add all the following variables
     * FLASK_APP=setup.py
     * FLASK_ENV=development
     * SECRET_KEY=`<some_secret_key>`
