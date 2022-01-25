@@ -1,6 +1,6 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, BooleanField, SubmitField
-from wtforms.validators import DataRequired, Email, EqualTo, ValidationError
+from wtforms import StringField, PasswordField, BooleanField, SubmitField, TextAreaField
+from wtforms.validators import DataRequired, Email, EqualTo, ValidationError, Length
 from cackle.models import User
 
 class LoginForm(FlaskForm):
@@ -24,3 +24,10 @@ class SignupForm(FlaskForm):
     def validate_email(self, email):
         if User.query.filter_by(email=email.data).first():
             raise ValidationError('This email is already in use. Select another')
+
+
+class EditProfileForm(FlaskForm):
+    username = StringField('Username', validators=[DataRequired()])
+    email = StringField('Email address', validators=[DataRequired(), Email()])
+    about_me = TextAreaField('Add/Edit a bio', validators=[Length(min=0, max=140, message='Your bio needs to be between 0 and 140 characters long')])
+    submit = SubmitField('Edit Profile')

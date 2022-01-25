@@ -9,6 +9,7 @@
             </div>
             <h4 class="user-handle">/{{user.username}}</h4>
         </div>
+        <p><a href="{{ url_for('edit_profile') }}">Edit</a> profile</p>
         {{ user.joined }}
         <hr>
             {% for post in posts %}

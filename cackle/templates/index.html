@@ -40,7 +40,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" aria-current="page" href="#">
+            <a class="nav-link" aria-current="page" href="{{ url_for('user', username=current_user.username) }}">
             <i class="fas fa-user-alt"></i>
               Profile
             </a>
@@ -52,7 +52,7 @@
             </a>
           </li>
           <li class="nav-item d-block d-md-none">
-            <a class="nav-link" aria-current="page" href="#">
+            <a class="nav-link" aria-current="page" href="{{ url_for('logout') }}">
             <i class="fas fa-sign-out-alt"></i>
               Logout
             </a>
