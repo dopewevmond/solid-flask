@@ -2,8 +2,13 @@
 
 {% block content %}
     <div class="container">
-        <h2>User: {{ user.username }}</h2>
-        <img src="{{ user.avatar(128) }}" alt="">
+        <h3 class="py-4">Profile</h3>
+        <div class="d-flex">
+            <div class="img-avatar-container">
+                <img src="{{user.avatar(40)}}" alt="{{user.username}}&apos;s avatar" class="img-fluid img-thumbnail rounded-circle">
+            </div>
+            <h4 class="user-handle">/{{user.username}}</h4>
+        </div>
         {{ user.joined }}
         <hr>
             {% for post in posts %}

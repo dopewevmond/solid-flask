@@ -1,6 +1,6 @@
-{% extends 'index.html' %}
+{% extends 'headers.html' %}
 
-{% block content %}
+{% block rest_of_content %}
     <div class="container">
         {% include 'flash.html' %}
 
@@ -43,10 +43,12 @@
                     {% endfor %}
                 </div>
 
-                <div class="input-group">
+                <div class="input-group mb-3">
                     {{form.submit(class='btn btn-success')}}
                 </div>
             </form>
+
+            <p>Already have an account? <a href="{{ url_for('login') }}">Log In</a> here.</p>
 
         </div>
         </div>
