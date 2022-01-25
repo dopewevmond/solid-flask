@@ -25,6 +25,10 @@ def login():
     form = LoginForm()
     if form.validate_on_submit():
         user = User.query.filter_by(username=form.username.data).first()
+        # if we didn't find by searching with the username
+        # we should search with the email
+        if not user:
+            user = User.query.filter_by(email=form.username.data).first()
         if user is None or not user.check_password(form.password.data):
             flash('Invalid username or password', 'danger')
             return redirect(url_for('login'))
@@ -60,7 +64,7 @@ def signup():
 def logout():
     logout_user()
     flash('Logged out successfully', 'success')
-    return redirect(url_for('index'))
+    return redirect(url_for('login'))
 
 # verifying my secret key
 @app.route('/verify')
