@@ -34,13 +34,13 @@
       <div class="position-sticky pt-3">
         <ul class="nav flex-column">
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="/">
+            <a class="nav-link {% if request.url_rule.endpoint=='index' %}active{% endif %}" aria-current="page" href="/">
             <i class="fas fa-home"></i>
               Home
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" aria-current="page" href="{{ url_for('user', username=current_user.username) }}">
+            <a class="nav-link {% if request.url_rule.endpoint=='user' %}active{% endif %}" aria-current="page" href="{{ url_for('user', username=current_user.username) }}">
             <i class="fas fa-user-alt"></i>
               Profile
             </a>

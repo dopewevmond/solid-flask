@@ -1,0 +1,14 @@
+{% extends 'index.html' %}
+
+{% block content %} 
+    <div class="container">
+        {% include 'flash.html' %}
+        {% if type=='404' %}
+            <p>The resource you requested for wasn&apos;t found</p>
+        {% elif type=='500' %}
+            <p>A server error occured. Go <a href="{{ url_for('index') }}">Home</a></p>
+        {% else %}
+            <p>An unknown error occured. Go <a href="{{ url_for('index') }}">Home</a></p>
+        {% endif %}
+    </div>
+{% endblock %}

@@ -13,4 +13,4 @@ login.login_view = 'login'
 login.login_message = 'You need to log in to access this page'
 login.login_message_category = 'warning'
 
-from cackle import routes, models
+from cackle import routes, models, errors
