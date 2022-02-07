@@ -11,4 +11,3 @@ Not really building anything interesting here. Just applying Flask concepts that
     * FLASK_APP=setup.py
     * FLASK_ENV=development
     * SECRET_KEY=`<some_secret_key>`
-Going on a short break to hone my SQL joining skills. I'll come back and complete it...
