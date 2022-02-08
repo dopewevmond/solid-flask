@@ -86,6 +86,13 @@
                     <p><a href="{{ url_for('user', username=post.author.username) }}"> {{post.author.username }}</a> says: </p>
                     <p>{{ post.body }}</p>
                 {% endfor %}
+
+                {% if prev_url %}
+                    <a href="{{ prev_url }}">Newer Posts</a>
+                {% endif %}
+                {% if next_url %}
+                    <a href="{{ next_url }}">Older Posts</a>
+                {% endif %}
             </div>
         {% endblock %}
       </div>
