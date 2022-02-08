@@ -45,3 +45,7 @@ class EditProfileForm(FlaskForm):
 
 class EmptyForm(FlaskForm):
     submit = SubmitField('Submit')
+
+class BlogForm(FlaskForm):
+    body = TextAreaField('Share what\'s happening with friends!', validators=[DataRequired('Please type something to share with friends!')])
+    submit = SubmitField('Post Cackle')

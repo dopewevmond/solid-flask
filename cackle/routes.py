@@ -1,6 +1,6 @@
 from cackle import app, db
 from flask import render_template, flash, redirect, url_for, request
-from cackle.forms import LoginForm, SignupForm, EditProfileForm, EmptyForm
+from cackle.forms import LoginForm, SignupForm, EditProfileForm, EmptyForm, BlogForm
 from flask_login import current_user, login_user, logout_user, login_required
 from cackle.models import User, Post
 from datetime import datetime
@@ -12,10 +12,18 @@ def before_request():
         db.session.commit()
 
 @app.route('/')
-@app.route('/home')
+@app.route('/home', methods=['GET', 'POST'])
 @login_required
 def index():
-    return render_template('index.html')
+    posts = current_user.followed_posts()
+    form = BlogForm()
+    if form.validate_on_submit():
+        blog_post = Post(body=form.body.data, user_id=current_user.id, timestamp=datetime.utcnow())
+        db.session.add(blog_post)
+        db.session.commit()
+        flash('The post was made successfully', 'success')
+        return redirect(url_for('index'))
+    return render_template('index.html', form=form, posts=posts)
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
