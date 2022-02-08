@@ -35,25 +35,26 @@
         <ul class="nav flex-column">
           <li class="nav-item">
             <a class="nav-link {% if request.url_rule.endpoint=='index' %}active{% endif %}" aria-current="page" href="/">
-            <i class="fas fa-home"></i>
               Home
             </a>
           </li>
           <li class="nav-item">
             <a class="nav-link {% if request.url_rule.endpoint=='user' %}active{% endif %}" aria-current="page" href="{{ url_for('user', username=current_user.username) }}">
-            <i class="fas fa-user-alt"></i>
               Profile
             </a>
           </li>
           <li class="nav-item">
+            <a class="nav-link {% if request.url_rule.endpoint=='explore' %}active{% endif %}" aria-current="page" href="{{ url_for('explore') }}">
+              Explore
+            </a>
+          </li>
+          <li class="nav-item">
             <a class="nav-link" aria-current="page" href="#">
-            <i class="fas fa-bookmark"></i>
               Saved Posts
             </a>
           </li>
           <li class="nav-item d-block d-md-none">
             <a class="nav-link" aria-current="page" href="{{ url_for('logout') }}">
-            <i class="fas fa-sign-out-alt"></i>
               Logout
             </a>
           </li>
@@ -67,17 +68,19 @@
             <div class="container">
                 {% include 'flash.html' %}
 
-                <form action="{{ url_for('index')}}" method="post" novalidate>
-                    {{ form.hidden_tag() }}
-                    <div class="mb-4">
-                        <label for="blogpost">{{form.body.label}}</label>
-                        {{ form.body(class='form-control', id='blogpost') }}
-                        {% for error in form.body.errors %}
-                            <small class="text-danger"> {{ error }}</small>
-                        {% endfor %}
-                    </div>
-                    {{ form.submit(class='btn btn-primary') }}
-                </form>
+                {% if form %}
+                    <form action="{{ url_for('index')}}" method="post" novalidate>
+                        {{ form.hidden_tag() }}
+                        <div class="mb-4">
+                            <label for="blogpost">{{form.body.label}}</label>
+                            {{ form.body(class='form-control', id='blogpost') }}
+                            {% for error in form.body.errors %}
+                                <small class="text-danger"> {{ error }}</small>
+                            {% endfor %}
+                        </div>
+                        {{ form.submit(class='btn btn-primary') }}
+                    </form>
+                {% endif %}
 
                 {% for post in posts %}
                     <p><a href="{{ url_for('user', username=post.author.username) }}"> {{post.author.username }}</a> says: </p>

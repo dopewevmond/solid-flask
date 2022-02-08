@@ -119,9 +119,15 @@ def unfollow(username):
         current_user.unfollow(user)
         db.session.commit()
         flash(f'Successfully unfollowed User - {username}', 'success')
-        return redirect(url_for('index'))
+        return redirect(url_for('user', username=username))
     else:
         return redirect(url_for('index'))
+
+@app.route('/explore')
+@login_required
+def explore():
+    posts = Post.query.order_by(Post.timestamp.desc()).all()
+    return render_template('index.html', title='Explore', posts=posts)
 
 
 @app.route('/logout')
