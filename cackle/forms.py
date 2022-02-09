@@ -49,3 +49,12 @@ class EmptyForm(FlaskForm):
 class BlogForm(FlaskForm):
     body = TextAreaField('Share what\'s happening with friends!', validators=[DataRequired('Please type something to share with friends!')])
     submit = SubmitField('Post Cackle')
+
+class ResetPasswordRequestForm(FlaskForm):
+    email = StringField('Email', validators=[DataRequired(), Email()])
+    submit = SubmitField('Request Password Reset')
+
+class ResetPasswordForm(FlaskForm):
+    password = PasswordField('Password', validators=[DataRequired()])
+    password2 = PasswordField('Confirm Password', validators=[DataRequired(), EqualTo('password', 'The passwords do not match')])
+    submit = SubmitField('Request Password Reset')
