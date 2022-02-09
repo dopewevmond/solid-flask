@@ -1,38 +1,50 @@
 {% extends 'index.html' %}
 
 {% block content %}
-    <div class="container">
-        {% include 'flash.html' %}
-        <h3 class="py-4">Profile</h3>
-        <div class="d-flex">
-            <div class="img-avatar-container">
-                <img src="{{user.avatar(40)}}" alt="{{user.username}}&apos;s avatar" class="img-fluid img-thumbnail rounded-circle">
+    <div class="container px-0 px-md-4">
+        <div class="row">
+            <div class="col-12 col-lg-6">
+                {% include 'flash.html' %}
+
+                    <div id="content" class="content p-0">
+                        <div class="profile-header gray-card-background">
+                            <div class="profile-header-cover gray-card-background"></div>
+                            <div class="profile-header-content">
+                                <div class="profile-header-img">
+                                    <img src="{{ user.avatar(120) }}" alt="{{ user.username }}'s avatar" />
+                                </div>
+                                <div class="profile-header-info">
+                                    <h4 class="m-t-sm">/{{user.username}}</h4>
+                                    <p class="my-1">{{ user.about_me }}</p>
+                                    <div class="my-1">
+                                        <span class="fw-bold">{{ user.followers.count() }}</span> Followers &nbsp; <span class="fw-bold">{{ user.followed.count() }}</span> Following
+                                    </div>
+                                    
+                                    
+                                    {% if user == current_user %}
+                                        <a href="{{ url_for('edit_profile') }}" class="btn btn-sm btn-primary">Edit Profile</a>
+                                    {% elif not current_user.is_following(user) %}
+                                        <form action="{{ url_for('follow', username=user.username) }}" method="post">
+                                            {{ form.hidden_tag() }}
+                                            {{ form.submit(value='Follow', class='btn btn-primary btn-sm mb-3') }}
+                                        </form>
+                                    {% else %}
+                                        <form action="{{ url_for('unfollow', username=user.username) }}" method="post">
+                                            {{ form.hidden_tag() }}
+                                            {{ form.submit(value='Unfollow', class='btn btn-primary btn-sm mb-3') }}
+                                        </form>
+                                    {% endif %}                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <hr />
+
+                    {% for post in posts %}
+                        {% include '_post.html'   %}
+                    {% endfor %}
             </div>
-            <h4 class="user-handle">/{{user.username}}</h4>
         </div>
-        <div class="py-1">
-            {{ user.followers.count() }} Followers, {{ user.followed.count() }} Following
-        </div>
-
-        {% if user == current_user %}
-            <p><a href="{{ url_for('edit_profile') }}">Edit</a> profile</p>
-        {% elif not current_user.is_following(user) %}
-            <form action="{{ url_for('follow', username=user.username) }}" method="post">
-                {{ form.hidden_tag() }}
-                {{ form.submit(value='Follow') }}
-            </form>
-        {% else %}
-            <form action="{{ url_for('unfollow', username=user.username) }}" method="post">
-                {{ form.hidden_tag() }}
-                {{ form.submit(value='Unfollow') }}
-            </form>
-        {% endif %}
-
-
-        {{ user.joined }}
-        <hr>
-            {% for post in posts %}
-                {% include '_post.html'   %}
-            {% endfor %}
     </div>
 {% endblock %}

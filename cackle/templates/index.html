@@ -65,34 +65,43 @@
     <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
       <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3">
         {% block content %}
-            <div class="container">
-                {% include 'flash.html' %}
-
-                {% if form %}
-                    <form action="{{ url_for('index')}}" method="post" novalidate>
-                        {{ form.hidden_tag() }}
-                        <div class="mb-4">
-                            <label for="blogpost">{{form.body.label}}</label>
-                            {{ form.body(class='form-control', id='blogpost') }}
-                            {% for error in form.body.errors %}
-                                <small class="text-danger"> {{ error }}</small>
-                            {% endfor %}
+            <div class="container px-0 px-md-4">
+                <div class="row">
+                    <div class="col-12 col-lg-6">
+                        {% include 'flash.html' %}
+                        <div class="py-4">
+                            <!-- showing input form to make a new post -->
+                            {% if form %}
+                            <form action="{{ url_for('index')}}" method="post" novalidate>
+                                {{ form.hidden_tag() }}
+                                <div class="mb-2">
+                                    <label for="blogpost" class="mb-1">{{form.body.label}}</label>
+                                    {{ form.body(class='form-control', id='blogpost', placeholder='Share something with friends...', rows='5') }}
+                                    {% for error in form.body.errors %}
+                                        <small class="text-danger"> {{ error }}</small>
+                                    {% endfor %}
+                                </div>
+                                {{ form.submit(class='btn btn-primary') }}
+                            </form>
+                            <hr />
+                            {% else %}
+                                <!-- if the form doesnt exist it means we are on the explore route since it does not send a form parameter to the render template -->
+                                <h2> Explore</h2>
+                            {% endif %}
                         </div>
-                        {{ form.submit(class='btn btn-primary') }}
-                    </form>
-                {% endif %}
 
-                {% for post in posts %}
-                    <p><a href="{{ url_for('user', username=post.author.username) }}"> {{post.author.username }}</a> says: </p>
-                    <p>{{ post.body }}</p>
-                {% endfor %}
+                        {% for post in posts %}
+                            {% include '_post.html'   %}
+                        {% endfor %}
 
-                {% if prev_url %}
-                    <a href="{{ prev_url }}">Newer Posts</a>
-                {% endif %}
-                {% if next_url %}
-                    <a href="{{ next_url }}">Older Posts</a>
-                {% endif %}
+                        {% if prev_url %}
+                            <a href="{{ prev_url }}" class="btn btn-sm btn-secondary mt-4 ms-2">Newer Posts</a>
+                        {% endif %}
+                        {% if next_url %}
+                            <a href="{{ next_url }}" class="btn btn-sm btn-secondary mt-4 ms-2">Older Posts</a>
+                        {% endif %}
+                    </div>
+                </div>
             </div>
         {% endblock %}
       </div>
