@@ -9,11 +9,11 @@
                     <div id="content" class="content p-0">
                         <div class="profile-header gray-card-background">
                             <div class="profile-header-cover gray-card-background"></div>
-                            <div class="profile-header-content">
-                                <div class="profile-header-img">
+                            <div class="profile-header-content row">
+                                <div class="profile-header-img col-3">
                                     <img src="{{ user.avatar(120) }}" alt="{{ user.username }}'s avatar" />
                                 </div>
-                                <div class="profile-header-info">
+                                <div class="profile-header-info col-9">
                                     <h4 class="m-t-sm">/{{user.username}}</h4>
                                     <p class="my-1">{{ user.about_me }}</p>
                                     <div class="my-1">

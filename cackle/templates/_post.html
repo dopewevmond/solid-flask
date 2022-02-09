@@ -1,11 +1,11 @@
 <div id="content" class="content p-0 border mb-2">
     <div class="profile-header">
         <div class="profile-header-cover"></div>
-        <div class="profile-header-content">
-            <div class="profile-header-img">
+        <div class="profile-header-content row">
+            <div class="profile-header-img col-3">
                 <img src="{{ post.author.avatar(120) }}" alt="{{ post.author.username }}'s avatar" class="img-thumbnail" />
             </div>
-            <div class="profile-header-info">                                   
+            <div class="profile-header-info col-9">                                   
                 <div class="mb-1">
                     <a href="{{ url_for('user', username=post.author.username) }}" class="fs-4">/{{ post.author.username }}</a>
                 </div>

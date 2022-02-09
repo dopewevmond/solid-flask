@@ -60,7 +60,7 @@ def login():
 def user(username):
     form = EmptyForm()
     user = User.query.filter_by(username=username).first_or_404()
-    posts = user.posts
+    posts = Post.query.filter_by(user_id=user.id).order_by(Post.timestamp.desc())
     return render_template('user.html', user=user, posts=posts, form=form)
 
 @app.route('/edit_profile', methods=['GET', 'POST'])

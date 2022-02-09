@@ -30,7 +30,7 @@ class EditProfileForm(FlaskForm):
     username = StringField('Username', validators=[DataRequired()])
     email = StringField('Email address', validators=[DataRequired(), Email()])
     about_me = TextAreaField('Add/Edit a bio', validators=[Length(min=0, max=140, message='Your bio needs to be between 0 and 140 characters long')])
-    submit = SubmitField('Edit Profile')
+    submit = SubmitField('Save Changes')
 
     def __init__(self, original_username, *args, **kwargs):
         super(EditProfileForm, self).__init__(*args, **kwargs)
