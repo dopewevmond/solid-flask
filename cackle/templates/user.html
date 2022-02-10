@@ -17,6 +17,9 @@
                                     <h4 class="m-t-sm">/{{user.username}}</h4>
                                     <p class="my-1">{{ user.about_me }}</p>
                                     <div class="my-1">
+                                        <span class="fw-bold">Joined </span>{{ moment(user.joined).format('MMM YYYY') }}
+                                    </div>
+                                    <div class="my-1">
                                         <span class="fw-bold">{{ user.followers.count() }}</span> Followers &nbsp; <span class="fw-bold">{{ user.followed.count() }}</span> Following
                                     </div>
                                     
