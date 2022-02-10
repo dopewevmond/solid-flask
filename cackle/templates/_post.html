@@ -1,6 +1,6 @@
 <div id="content" class="content p-0 border mb-2">
     <div class="profile-header">
-        <div class="profile-header-cover"></div>
+        <div class="profile-header-cover position-relative"></div>
         <div class="profile-header-content row">
             <div class="profile-header-img col-3">
                 <img src="{{ post.author.avatar(120) }}" alt="{{ post.author.username }}'s avatar" class="img-thumbnail" />
@@ -10,6 +10,15 @@
                     <a href="{{ url_for('user', username=post.author.username) }}" class="fs-4">/{{ post.author.username }}</a>
                 </div>
                 {{ post.body }}
+
+                {% if post.user_id == current_user.id %}
+                    <div class="absolute-delete-btn">
+                        <form action="{{ url_for('delete_post', post_id=post.id) }}" method="post">
+                            {{ empty_form.hidden_tag() }}
+                            {{ empty_form.submit(value='Delete', class='btn btn-danger btn-sm py-1 px-2') }}
+                        </form>
+                    </div>
+                {% endif %}
             </div>
         </div>
     </div>

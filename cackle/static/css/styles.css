@@ -211,3 +211,9 @@ body .fc-icon {
 .profile-header-img img {
     max-width: 100%;
 }
+
+.absolute-delete-btn {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+}

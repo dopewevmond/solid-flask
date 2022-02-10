@@ -75,8 +75,8 @@
                             <form action="{{ url_for('index')}}" method="post" novalidate>
                                 {{ form.hidden_tag() }}
                                 <div class="mb-2">
-                                    <label for="blogpost" class="mb-1">{{form.body.label}}</label>
-                                    {{ form.body(class='form-control', id='blogpost', placeholder='Share something with friends...', rows='5') }}
+                                    {{form.body.label}}
+                                    {{ form.body(class='form-control', id='body', placeholder='Share something with friends...', rows='5') }}
                                     {% for error in form.body.errors %}
                                         <small class="text-danger"> {{ error }}</small>
                                     {% endfor %}

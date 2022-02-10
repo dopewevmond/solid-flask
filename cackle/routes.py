@@ -17,6 +17,7 @@ def before_request():
 @login_required
 def index():
     form = BlogForm()
+    empty_form = EmptyForm()
     if form.validate_on_submit():
         blog_post = Post(body=form.body.data, user_id=current_user.id, timestamp=datetime.utcnow())
         db.session.add(blog_post)
@@ -33,7 +34,8 @@ def index():
                             form=form,
                             posts=posts.items,
                             next_url=next_url,
-                            prev_url=prev_url)
+                            prev_url=prev_url,
+                            empty_form=empty_form)
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
@@ -67,6 +69,7 @@ def user(username):
 @login_required
 def edit_profile():
     form = EditProfileForm(current_user.username)
+    empty_form = EmptyForm()
     if form.validate_on_submit():
         current_user.username = form.username.data
         current_user.email = form.email.data
@@ -78,7 +81,7 @@ def edit_profile():
         form.username.data = current_user.username 
         form.email.data = current_user.email
         form.about_me.data = current_user.about_me
-    return render_template('edit_profile.html', form=form)
+    return render_template('edit_profile.html', form=form, empty_form=empty_form)
 
 @app.route('/signup', methods=['GET', 'POST'])
 def signup():
@@ -136,6 +139,7 @@ def unfollow(username):
 @app.route('/explore')
 @login_required
 def explore():
+    empty_form = EmptyForm()
     page = request.args.get('page', 1, type=int)
     posts = Post.query.order_by(Post.timestamp.desc()).paginate(
         page, app.config['POSTS_PER_PAGE'], False)
@@ -145,7 +149,8 @@ def explore():
                             title='Explore',
                             posts=posts.items,
                             next_url=next_url,
-                            prev_url=prev_url)
+                            prev_url=prev_url,
+                            empty_form=empty_form)
 
 @app.route('/reset_password_request', methods=['GET', 'POST'])
 def reset_password_request():
@@ -176,6 +181,20 @@ def reset_password(token):
         return redirect(url_for('login'))
     return render_template('reset_password.html', form=form)
 
+
+@app.route('/delete_post/<post_id>', methods=['POST'])
+@login_required
+def delete_post(post_id):
+    form = EmptyForm()
+    if form.validate_on_submit():
+        post = Post.query.filter_by(id=post_id).first()
+        if not post or post.user_id != current_user.id:
+            flash('Unable to delete post', 'warning')
+            return redirect(url_for('index'))
+        db.session.delete(post)
+        db.session.commit()
+        flash('Post deleted successfully', 'success')
+    return redirect(url_for('index'))
 
 @app.route('/logout')
 def logout():
