@@ -1,8 +1,8 @@
 from cackle import app, db
 from flask import render_template, flash, redirect, url_for, request
-from cackle.forms import EditProfileForm, EmptyForm, BlogForm
+from .forms import EditProfileForm, EmptyForm, BlogForm
 from flask_login import current_user, login_required
-from cackle.models import User, Post
+from cackle.main.models import User, Post
 from datetime import datetime
 
 @app.before_request
@@ -133,10 +133,3 @@ def delete_post(post_id):
         db.session.commit()
         flash('Post deleted successfully', 'success')
     return redirect(url_for('index'))
-
-
-
-# verifying my secret key
-@app.route('/verify')
-def verify():
-    return '<p>{}</p>'.format(app.config['SECRET_KEY'])

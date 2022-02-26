@@ -2,7 +2,7 @@ from flask import render_template, redirect, url_for, flash
 from flask_login import current_user, login_user, logout_user
 from cackle import db
 from cackle.auth import bp
-from cackle.models import User
+from cackle.main.models import User
 from cackle.auth.forms import LoginForm, SignupForm, ResetPasswordForm, ResetPasswordRequestForm
 from cackle.auth.email import send_password_reset_email
 

@@ -1,7 +1,7 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, BooleanField, SubmitField, TextAreaField
-from wtforms.validators import DataRequired, Email, EqualTo, ValidationError, Length
-from cackle.models import User
+from wtforms import StringField, SubmitField, TextAreaField
+from wtforms.validators import DataRequired, Email, ValidationError, Length
+from cackle.main.models import User
 
 
 class EditProfileForm(FlaskForm):

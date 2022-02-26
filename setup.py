@@ -1,5 +1,5 @@
 from cackle import app, db
-from cackle.models import User, Post
+from cackle.main.models import User, Post
 
 @app.shell_context_processor
 def make_shell_context():
