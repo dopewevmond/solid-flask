@@ -3,28 +3,6 @@ from wtforms import StringField, PasswordField, BooleanField, SubmitField, TextA
 from wtforms.validators import DataRequired, Email, EqualTo, ValidationError, Length
 from cackle.models import User
 
-class LoginForm(FlaskForm):
-    username = StringField('Username', validators=[DataRequired()])
-    password = PasswordField('Enter password', validators=[DataRequired()])
-    remember_me = BooleanField('Remember me')
-    submit = SubmitField('Log In')
-
-
-class SignupForm(FlaskForm):
-    username = StringField('Type your preferred username', validators=[DataRequired()])
-    email = StringField('Email address', validators=[DataRequired(), Email()])
-    password = PasswordField('Create a password', validators=[DataRequired()])
-    password2 = PasswordField('Confirm password', validators=[DataRequired(), EqualTo('password', 'The passwords you entered do not match')])
-    submit = SubmitField('Sign Up')
-
-    def validate_username(self, username):
-        if User.query.filter_by(username=username.data).first():
-            raise ValidationError('This username is already in use. Select another')
-
-    def validate_email(self, email):
-        if User.query.filter_by(email=email.data).first():
-            raise ValidationError('This email is already in use. Select another')
-
 
 class EditProfileForm(FlaskForm):
     username = StringField('Username', validators=[DataRequired()])
@@ -49,12 +27,3 @@ class EmptyForm(FlaskForm):
 class BlogForm(FlaskForm):
     body = TextAreaField('Share what\'s happening with friends!', validators=[DataRequired('Please type something to share with friends!')])
     submit = SubmitField('Post Cackle')
-
-class ResetPasswordRequestForm(FlaskForm):
-    email = StringField('Email', validators=[DataRequired(), Email()])
-    submit = SubmitField('Request Password Reset')
-
-class ResetPasswordForm(FlaskForm):
-    password = PasswordField('Password', validators=[DataRequired()])
-    password2 = PasswordField('Confirm Password', validators=[DataRequired(), EqualTo('password', 'The passwords do not match')])
-    submit = SubmitField('Request Password Reset')
