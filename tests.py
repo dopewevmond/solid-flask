@@ -1,7 +1,7 @@
 from datetime import datetime, timedelta
 import unittest
 from cackle import db, create_app
-from cackle.main.models import User, Post
+from cackle.models import User, Post
 from cackle.config import Config
 
 class TestConfig(Config):

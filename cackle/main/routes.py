@@ -3,7 +3,7 @@ from cackle import db
 from flask import render_template, flash, redirect, url_for, request
 from .forms import EditProfileForm, EmptyForm, BlogForm
 from flask_login import current_user, login_required
-from cackle.main.models import User, Post
+from cackle.models import User, Post
 from datetime import datetime
 from . import bp
 
