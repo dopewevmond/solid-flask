@@ -7,7 +7,7 @@
             </div>
             <div class="profile-header-info col-9">                                   
                 <div class="mb-1">
-                    <a href="{{ url_for('user', username=post.author.username) }}" class="fs-4">/{{ post.author.username }}</a>
+                    <a href="{{ url_for('main.user', username=post.author.username) }}" class="fs-4">/{{ post.author.username }}</a>
                     • <span class="fs-6"> {{ moment(post.timestamp).fromNow() }} </span>
                 </div>
                 {{ post.body }}
@@ -15,7 +15,7 @@
                 {% if post.user_id == current_user.id %}
                     <div class="absolute-delete-btn">
                         {% if empty_form %}
-                            <form action="{{ url_for('delete_post', post_id=post.id) }}" method="post">
+                            <form action="{{ url_for('main.delete_post', post_id=post.id) }}" method="post">
                                 {{ empty_form.hidden_tag() }}
                                 {{ empty_form.submit(value='Delete', class='btn btn-danger btn-sm py-1 px-2') }}
                             </form>
